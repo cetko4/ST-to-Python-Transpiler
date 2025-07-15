@@ -1,0 +1,7 @@
+Here is the list of mappings:
+
+- `ArUserAssignRole` → `UserAssignRole.call`
+- `ArUserAuthenticatePassword` → `UserAuthenticatePassword.call`
+- `ArUserCreate` → `UserCreate.call`
+- `ArUserCreateRole` → `UserCreateRole.call`
+- `ArUserSetPassword` → `UserSetPassword.call`

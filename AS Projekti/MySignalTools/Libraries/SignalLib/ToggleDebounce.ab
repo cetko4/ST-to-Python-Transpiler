@@ -1,0 +1,19 @@
+
+(*  *)
+FUNCTION_BLOCK ToggleDebounce
+	EdgeDetected := TRIG AND NOT PrevTrig;
+	
+	IF CycleCounter < DEBOUNCE_CYCLES THEN
+		CycleCounter := CycleCounter + 1;
+	ENDIF;
+	
+	IF EdgeDetected AND (CycleCounter >= DEBOUNCE_CYCLES) THEN
+		CURRENT_STATE := NOT CURRENT_STATE;
+		CycleCounter := 0;
+		VALID_EDGE := TRUE;
+	ELSE
+		VALID_EDGE := FALSE
+	ENDIF;
+	
+	PrevTrig := TRIG;
+END_FUNCTION_BLOCK
