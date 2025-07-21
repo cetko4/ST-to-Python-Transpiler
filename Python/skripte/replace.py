@@ -100,6 +100,7 @@ def write_file(filename: str, content: str) -> None:
         sys.exit(1)
 
 def main():
+    # This should be the path to the Python file you want to modify
     file_path = "D:\\ST Grammar\\output\\Ramp\\Program.py"
     mapping_file = output_path
 

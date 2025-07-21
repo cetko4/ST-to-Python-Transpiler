@@ -49,9 +49,9 @@ def run_make():
     print("-" * 50)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2 or sys.argv[1] not in ['1', '2', '3']:	
-        print("Usage: python combined_script.py [1|2|3]")
-        print("1: RampController\n2: SignalTools\n3: ArUser")
+    if len(sys.argv) != 2 or sys.argv[1] not in ['1', '2']:	
+        print("Usage: python combined_script.py [1|2]")
+        print("1: RampController\n2: SignalTools\n")
         sys.exit(1)
 
     choice = int(sys.argv[1])
