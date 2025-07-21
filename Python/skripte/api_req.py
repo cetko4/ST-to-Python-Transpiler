@@ -2,7 +2,7 @@ import boto3
 import json
 import os
 import fitz
-from config import FILE_PATH_PROGRAM, FILE_PATH_PY_LIB
+from config import FILE_PATH_PROGRAM, FILE_PATH_PY_LIB, ONE_TO_ONE_PROGRAM_PATH
 from compare_functions import prepare_and_merge_documentation
 
 output_filename = os.path.splitext(os.path.basename(FILE_PATH_PROGRAM))[0] + "_output.txt"
@@ -51,70 +51,72 @@ def call_bedrock_api(prompt: str) -> str:
     return response_body['choices'][0]['message']['content']
 
 if __name__ == "__main__":
-    # documentation
+    # === Load documentation ===
     merged_doc_path = prepare_and_merge_documentation()
     documentation_text = load_file(merged_doc_path)
 
-    # ST program and Python library
-    st_program_code = load_file(FILE_PATH_PROGRAM)
-    python_library_code = load_file(FILE_PATH_PY_LIB)
-
-    # Load function block names from the common functions file
+    # === Load function block names from the list ===
     fb_list_path = "D:\\ST to Py\\Python\\functions\\common_functions.txt"
     fb_names_raw = load_file(fb_list_path)
 
+    # === Auto-generate library name and output path ===
+    program_basename = os.path.splitext(os.path.basename(FILE_PATH_PROGRAM))[0]
+    library_name = program_basename + "_lib"
+    output_path = os.path.join("D:\\ST to Py\\Python\\outputs", f"{library_name}.py")
+
+    # === Format function block list for prompt ===
     formatted_fb_list = "\n".join(f"- {line}" for line in fb_names_raw.strip().splitlines() if line.strip())
-    rules_section = f"""
-                    ONLY consider the following vendor-documented ST function blocks used in the program:
 
-                    {formatted_fb_list}
-
-                    ❗ Strict rules:
-                    - ONLY use the above names on the left side of your mappings.
-                    - Do NOT rename or modify the names.
-                    - If no match is found, write: <FunctionBlockName> → No match found
-                    """
-
+    # === Define prompt ===
     prompt = f"""
-            {rules_section}
+    You are given documentation for vendor-documented Structured Text (ST) function blocks used in a program:
+    {documentation_text}
 
-            You are given documentation for these function blocks:\n\n{documentation_text}\n\n
+    📌 Function Blocks To Implement:
+    {formatted_fb_list}
 
-            ⚠️ Very Important Instructions:
-            - ONLY consider ST functions that are described in the above documentation (`st_lib`).
-            - COMPLETELY IGNORE all other parts of the ST code — do not analyze expressions, lines, variables, or any non-documented logic.
-            - You are NOT allowed to guess function behavior based on the ST program itself.
-            - You should NOT infer or suggest anything based on the structure of the code that is not documented.
-            - For Python functions, always provide the full names including the class or module prefix as defined in the Python library.
-            - Do NOT provide only method names without their class prefixes.
+    And here is the Python program that should use these function blocks:
+    {load_file(ONE_TO_ONE_PROGRAM_PATH)}
 
-            Next, you are given a Python library:\n\n{python_library_code}\n\n
+    🎯 Your task:
+    For each function block listed above and documented in the provided text:
+    - Implement a functionally equivalent version of that function block in Python.
+    - You may define Python classes or functions as needed.
+    - Ensure that the behavior is consistent with the documentation — no assumptions or guessing.
 
-            Your task:
-            - For each vendor-documented function block listed above, try to find one or more matching or closely related function(s) in the Python library.
-            - If there is no matching function, say so clearly.
-            - DO NOT write or suggest any new code.
-            - DO NOT analyze logic in the ST code that is unrelated to functions in `st_lib`.
+    ⚠️ Strict Rules:
+    - Do NOT use or analyze the ST program code itself.
+    - Do NOT use the existing Python library. You are writing a **new** Python implementation.
+    - Only rely on the documentation provided.
+    - If a function block is not documented in the `formatted_fb_list`, skip it and comment: <FunctionBlockName> → No documentation, skipped
 
-            ✅ Focus: Vendor-documented functions only → matched Python functions.
-            ❌ Ignore: Any logic that does not directly call a documented vendor function.
+    ✅ Implementation Guidelines:
+    - Use clear Python code with comments explaining key parts if necessary.
+    - Use dataclasses for stateful components where appropriate (e.g., function blocks with memory or internal state).
+    - Use snake_case for function and variable names.
+    - If a function block has enable/reset or rising edge triggers, implement them accordingly.
+    - Do NOT use triple backticks (```), do NOT use Markdown formatting.
+    - Just print the code directly as plain text after each header.
+    - Be case sensitive and follow the exact names from the documentation and python program to implement the functions.
 
-            📝 Output Format:
-            Provide only a list of mappings in the following format:
-            <FunctionBlockName> → <Python_Function_Name>
-            If no match exists:
-            <FunctionBlockName> → No match found
+    📝 Output Format:
+    For each documented function block, write:
 
-            If there are multiple mappings:
-            <FunctionBlockName> → <PythonFunc1>, <PythonFunc2>
-            """
+    ### <FunctionBlockName>
+    # Python code here, as plain text
+    # No ```python, no Markdown formatting
+
+    If a function block has no documentation:
+    <FunctionBlockName> → No documentation, skipped
+    """
 
     # === Call the API and save the result ===
     result = call_bedrock_api(prompt)
 
-    print("\nMAPPING RESULT:\n")
+    # === Output the result ===
+    print("\nGENERATED PYTHON LIBRARY:\n")
     print(result)
 
+    # === Save to auto-named output file ===
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(result)
-
