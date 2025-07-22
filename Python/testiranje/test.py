@@ -2,14 +2,15 @@ import sys
 import os
 import subprocess
 
-def update_config(program_path, var_path, fun_path, lib_path, py_lib_path, doc_path):
+def update_config(program_path, var_path, fun_path, lib_path, py_lib_path, doc_path, one_to_one):
     lines_to_update = {
         "FILE_PATH_PROGRAM": f"{repr(program_path)}\n",
         "FILE_PATH_VARS": f"{repr(var_path)}\n",
         "FILE_PATH_FUN": f"{repr(fun_path)}\n",
         "FILE_PATH_LIB": f"{repr(lib_path)}\n",
         "FILE_PATH_PY_LIB": f"{repr(py_lib_path)}\n",
-        "FILE_DOCUMENTATION_PATH": f"{repr(doc_path)}\n"
+        "FILE_DOCUMENTATION_PATH": f"{repr(doc_path)}\n",
+        "ONE_TO_ONE_PATH": f"{repr(one_to_one)}\n"
     }
 
     config_path = "D:\\ST to Py\\Python\\skripte\\config.py"
@@ -64,12 +65,13 @@ if __name__ == "__main__":
         lib_path = f"{project_dir}\\Logical\\Libraries\\RampLib"
         py_lib_path = "D:\\ST to Py\\py_libs\\RampController\\RampLib.py"
         doc_path = "D:\\ST to Py\\Dokumentacija\\RampController"
+        one_to_one = "D:\\ST to Py\\1to1_replace\\Ramp\\Program.py"
 
         for idx, program_path in enumerate(program_examples, 1):
             base_dir = os.path.dirname(program_path)
             var_path = os.path.join(base_dir, "Variables.var")
             print(f"\n=== Running test case {idx} ===")
-            update_config(program_path, var_path, fun_path, lib_path, py_lib_path, doc_path)
+            update_config(program_path, var_path, fun_path, lib_path, py_lib_path, doc_path, one_to_one)
             run_make()
 
     #SignalTools
@@ -80,12 +82,13 @@ if __name__ == "__main__":
         lib_path = f"{project_dir}\\Logical\\Libraries\\SignalLib"
         py_lib_path = "D:\\ST to Py\\py_libs\\SignalLib\\SignalLib.py"
         doc_path = "D:\\ST to Py\\Dokumentacija\\SignalLib"
+        one_to_one = "D:\\ST to Py\\1to1_replace\\Signal\\Program.py"
 
         for idx, program_path in enumerate(program_examples, 1):
             base_dir = os.path.dirname(program_path)
             var_path = os.path.join(base_dir, "Variables.var")
             print(f"\n=== Running test case {idx} ===")
-            update_config(program_path, var_path, fun_path, lib_path, py_lib_path, doc_path)
+            update_config(program_path, var_path, fun_path, lib_path, py_lib_path, doc_path, one_to_one)
             run_make()
 
     #ArUser
