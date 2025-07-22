@@ -55,42 +55,40 @@ if __name__ == "__main__":
     merged_doc_path = prepare_and_merge_documentation()
     documentation_text = load_file(merged_doc_path)
 
-    # === Load function block names from the list ===
+    # === Format function block list for prompt ===
     fb_list_path = "D:\\ST to Py\\Python\\functions\\common_functions.txt"
     fb_names_raw = load_file(fb_list_path)
+    formatted_fb_list = "\n".join(f"- {line}" for line in fb_names_raw.strip().splitlines() if line.strip())
 
     # === Auto-generate library name and output path ===
     program_basename = os.path.splitext(os.path.basename(FILE_PATH_PROGRAM))[0]
     library_name = program_basename + "_lib"
     output_path = os.path.join("D:\\ST to Py\\Python\\outputs", f"{library_name}.py")
 
-    # === Format function block list for prompt ===
-    formatted_fb_list = "\n".join(f"- {line}" for line in fb_names_raw.strip().splitlines() if line.strip())
-
     # === Define prompt ===
     prompt = f"""
     You are given documentation for vendor-documented Structured Text (ST) function blocks used in a program:
     {documentation_text}
 
-    📌 Function Blocks To Implement:
+    Function Blocks To Implement:
     {formatted_fb_list}
 
     And here is the Python program that should use these function blocks:
     {load_file(ONE_TO_ONE_PROGRAM_PATH)}
 
-    🎯 Your task:
+    Your task:
     For each function block listed above and documented in the provided text:
     - Implement a functionally equivalent version of that function block in Python.
     - You may define Python classes or functions as needed.
     - Ensure that the behavior is consistent with the documentation — no assumptions or guessing.
 
-    ⚠️ Strict Rules:
+    Strict Rules:
     - Do NOT use or analyze the ST program code itself.
     - Do NOT use the existing Python library. You are writing a **new** Python implementation.
     - Only rely on the documentation provided.
     - If a function block is not documented in the `formatted_fb_list`, skip it and comment: <FunctionBlockName> → No documentation, skipped
 
-    ✅ Implementation Guidelines:
+    Implementation Guidelines:
     - Use clear Python code with comments explaining key parts if necessary.
     - Use dataclasses for stateful components where appropriate (e.g., function blocks with memory or internal state).
     - Use snake_case for function and variable names.
@@ -99,7 +97,7 @@ if __name__ == "__main__":
     - Just print the code directly as plain text after each header.
     - Be case sensitive and follow the exact names from the documentation and python program to implement the functions.
 
-    📝 Output Format:
+    Output Format:
     For each documented function block, write:
 
     ### <FunctionBlockName>
