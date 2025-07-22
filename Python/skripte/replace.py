@@ -3,7 +3,8 @@ Function Block Replacer Script (In-Place)
 
 This script takes a function mapping and replaces function block instantiations
 in a Python file based on the provided mapping. It also inserts an import statement
-like `from ArUser import *` if not already present.
+like `from ArUser import *` if not already present and adds function block comments
+above their usage lines.
 """
 
 import re
@@ -30,32 +31,91 @@ def parse_function_mapping(mapping_text: str) -> Dict[str, str]:
             continue
 
         old_func = match.group(1)
-        right_side = match.group(2)
+        right_side = match.group(2).strip()
 
-        # Extract first class name before a dot
-        classes = re.findall(r"([A-Za-z_][\w]*)\s*\.", right_side)
-        if classes:
-            function_map[old_func] = classes[0]
-            print(f"  -> Matched: {old_func} → {classes[0]}")
-        else:
-            print(f"  -> No valid target found for: {old_func}")
+        # Store full RHS for comments
+        function_map[old_func] = right_side
+        print(f"  -> Matched: {old_func} → {right_side}")
 
     return function_map
-
 
 
 def replace_function_blocks(code: str, function_map: Dict[str, str]) -> str:
     modified_code = code
     for old_function, new_class in function_map.items():
-        # Pattern matches
-        # Match with word boundary to avoid partial matches
+        # Replace: var_name = OldFunc()
         pattern = re.compile(r'(\s*)(\w+)\s*=\s*' + re.escape(old_function) + r'\s*\(\s*\)')
         def replacement(match):
             indent = match.group(1)
             var_name = match.group(2)
-            return f'{indent}{var_name} = {new_class}()'
+            # Use only class name part before dot for replacement
+            replacement_class = new_class.split(".")[0]
+            return f'{indent}{var_name} = {replacement_class}()'
         modified_code = pattern.sub(replacement, modified_code)
     return modified_code
+
+
+def find_variable_to_class_map(code: str, function_map: Dict[str, str]) -> Dict[str, str]:
+    """
+    Finds variable names in the code that instantiate mapped classes and returns
+    a dictionary like LimiterFB → SignalLimiter.
+    """
+    var_to_funcblock = {}
+    lines = code.splitlines()
+
+    # Reverse mapping from RHS class to LHS logical block name
+    rhs_to_lhs = {}
+    for lhs, rhs in function_map.items():
+        rhs_class = rhs.split('.')[0].strip()  # Only use the class before dot
+        rhs_to_lhs[rhs_class] = lhs
+
+    pattern = re.compile(r'(\w+)\s*=\s*(\w+)\s*\(\s*\)')  # e.g., LimiterFB = SignalController()
+
+    for line in lines:
+        match = pattern.match(line.strip())
+        if match:
+            var_name, class_name = match.groups()
+            if class_name in rhs_to_lhs:
+                var_to_funcblock[var_name] = rhs_to_lhs[class_name]
+                print(f"  -> Variable {var_name} is instance of {class_name} → {rhs_to_lhs[class_name]}")
+    return var_to_funcblock
+
+
+def insert_function_comments(code: str, function_map: Dict[str, str], var_to_funcblock: Dict[str, str]) -> str:
+    lines = code.splitlines()
+    modified_lines = []
+    already_commented = set()
+
+    for line in lines:
+        stripped = line.strip()
+        inserted = False
+        for var_name, func_block_name in var_to_funcblock.items():
+            rhs = function_map.get(func_block_name)
+            if not rhs:
+                continue
+
+            # Skip lines that look like variable instantiations:
+            # e.g. VarName = ClassName()
+            if re.match(rf'^\s*{re.escape(var_name)}\s*=\s*\w+\s*\(\s*\)', line):
+                continue
+
+            # Look for usage like self.VarName(...)
+            pattern = re.compile(rf'\b(self\.)?{re.escape(var_name)}\s*\(')
+            if pattern.search(stripped):
+                indent = re.match(r'\s*', line).group(0)
+                comment_key = (var_name, rhs)
+                if comment_key not in already_commented:
+                    comment_line = f"{indent}#{var_name} → {rhs}"
+                    modified_lines.append(comment_line)
+                    already_commented.add(comment_key)
+                    inserted = True
+                break  # Only one comment per line
+        modified_lines.append(line)
+
+    return "\n".join(modified_lines)
+
+
+
 
 def insert_library_import(code: str, lib_path: str) -> str:
     """
@@ -80,6 +140,7 @@ def insert_library_import(code: str, lib_path: str) -> str:
     lines.insert(insert_index, import_line)
     return "\n".join(lines)
 
+
 def read_file(filename: str) -> str:
     try:
         with open(filename, 'r', encoding='utf-8') as f:
@@ -91,6 +152,7 @@ def read_file(filename: str) -> str:
         print(f"Error reading file '{filename}': {e}")
         sys.exit(1)
 
+
 def write_file(filename: str, content: str) -> None:
     try:
         with open(filename, 'w', encoding='utf-8') as f:
@@ -99,9 +161,10 @@ def write_file(filename: str, content: str) -> None:
         print(f"Error writing file '{filename}': {e}")
         sys.exit(1)
 
+
 def main():
     # This should be the path to the Python file you want to modify
-    file_path = "D:\\ST Grammar\\output\\Ramp\\Program.py"
+    file_path = "D:\\ST to Py\\1to1_replace\\Ramp\\Program.py"
     mapping_file = output_path
 
     print(f"Using mapping file: {mapping_file}")
@@ -116,15 +179,25 @@ def main():
         return
 
     print("Function mappings found:")
-    for old_func, new_class in function_map.items():
-        print(f"  {old_func} → {new_class}")
+    for old_func, rhs in function_map.items():
+        print(f"  {old_func} → {rhs}")
     
+    # Replace function blocks first
     modified_code = replace_function_blocks(input_code, function_map)
+    
+    # Find variable → function block mappings
+    var_to_funcblock = find_variable_to_class_map(modified_code, function_map)
+    
+    # Insert comments based on variable usage
+    modified_code = insert_function_comments(modified_code, function_map, var_to_funcblock)
+    
+    # Insert import if missing
     modified_code = insert_library_import(modified_code, FILE_PATH_PY_LIB)
 
     write_file(file_path, modified_code)
     
     print(f"\nReplacement complete. File '{file_path}' updated in place.")
+
 
 if __name__ == "__main__":
     main()

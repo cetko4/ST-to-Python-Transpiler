@@ -1,5 +1,5 @@
-Here is the list of mappings:
-
-- `SignalIntegrator` → `Intergrator.accumulate`, `Intergrator.update_output`
-- `SignalLimiter` → `SignalController.clamp_signal`, `SignalController.apply_hysteresis`
-- `ToggleDebounce` → `Toggler.detect_edge`
+```
+SignalIntegrator → Intergrator.accumulate, Intergrator.update_output
+SignalLimiter → SignalController.clamp_signal, SignalController.apply_hysteresis
+ToggleDebounce → Toggler.detect_edge
+```
