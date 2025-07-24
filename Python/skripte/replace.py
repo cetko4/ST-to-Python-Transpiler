@@ -3,7 +3,7 @@ Function Block Replacer Script (In-Place)
 
 This script takes a function mapping and replaces function block instantiations
 in a Python file based on the provided mapping. It also inserts an import statement
-like `from ArUser import *` if not already present and adds function block comments
+like `from SignalLib import *` if not already present and adds function block comments
 above their usage lines.
 """
 
