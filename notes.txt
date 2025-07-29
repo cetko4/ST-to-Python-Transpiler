@@ -1,0 +1,6 @@
+notes:
+ - Robustness is crucial, and how to achieve it?
+ - In the industry, robustness is achieved by testing it thoroughly, but that takes time. How do we speed this process up?
+ - We cannot automate it entirely, but we can use LLMs as copilots to help you generate tests.
+ - Idea: we could use 3 different LLMs to generate test, where each LLM has a specific area of expertise
+ - GOAL: create a tool that automates the testing process as much as possible. Thoroughly test on a small number of examples.

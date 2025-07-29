@@ -1,0 +1,400 @@
+Program started
+
+--------------------------------------
+log_time:2025-07-29 10:08:20.607645
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 0.0
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 0.0
+--------------------------------------
+log_time:2025-07-29 10:08:21.129965
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 1.7000000000000004
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 1.7000000000000004
+--------------------------------------
+log_time:2025-07-29 10:08:21.653849
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 6.699999999999992
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 6.699999999999992
+--------------------------------------
+log_time:2025-07-29 10:08:22.178703
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 11.699999999999974
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 11.699999999999974
+--------------------------------------
+log_time:2025-07-29 10:08:22.699683
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 16.699999999999967
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 16.699999999999967
+--------------------------------------
+log_time:2025-07-29 10:08:23.221679
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 20.000000000000014
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 20.000000000000014
+--------------------------------------
+log_time:2025-07-29 10:08:23.743757
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 20.000000000000014
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 20.000000000000014
+--------------------------------------
+log_time:2025-07-29 10:08:24.266981
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 20.000000000000014
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 20.000000000000014
+--------------------------------------
+log_time:2025-07-29 10:08:24.789418
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 20.000000000000014
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 20.000000000000014
+--------------------------------------
+log_time:2025-07-29 10:08:25.312062
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 21.70000000000004
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 21.70000000000004
+--------------------------------------
+log_time:2025-07-29 10:08:25.834786
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 26.70000000000011
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 26.70000000000011
+--------------------------------------
+log_time:2025-07-29 10:08:26.357840
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 31.70000000000018
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 31.70000000000018
+--------------------------------------
+log_time:2025-07-29 10:08:26.879993
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 36.70000000000025
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 36.70000000000025
+--------------------------------------
+log_time:2025-07-29 10:08:27.403608
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 40.0000000000003
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 40.0000000000003
+--------------------------------------
+log_time:2025-07-29 10:08:27.925417
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 40.0000000000003
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 40.0000000000003
+--------------------------------------
+log_time:2025-07-29 10:08:28.449531
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 40.0000000000003
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 40.0000000000003
+--------------------------------------
+log_time:2025-07-29 10:08:28.972384
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 40.0000000000003
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 40.0000000000003
+--------------------------------------
+log_time:2025-07-29 10:08:29.495720
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 41.70000000000032
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 41.70000000000032
+--------------------------------------
+log_time:2025-07-29 10:08:30.018031
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 46.700000000000394
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 46.700000000000394
+--------------------------------------
+log_time:2025-07-29 10:08:30.541567
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 51.700000000000465
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 51.700000000000465
+--------------------------------------
+log_time:2025-07-29 10:08:31.064507
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 56.700000000000536
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 56.700000000000536
+--------------------------------------
+log_time:2025-07-29 10:08:31.588829
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 60.00000000000058
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 60.00000000000058
+--------------------------------------
+log_time:2025-07-29 10:08:32.109686
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 60.00000000000058
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 60.00000000000058
+--------------------------------------
+log_time:2025-07-29 10:08:32.634348
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 60.00000000000058
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 60.00000000000058
+--------------------------------------
+log_time:2025-07-29 10:08:33.159708
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 60.00000000000058
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 60.00000000000058
+--------------------------------------
+log_time:2025-07-29 10:08:33.680563
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 61.70000000000061
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 61.70000000000061
+--------------------------------------
+log_time:2025-07-29 10:08:34.205623
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 66.70000000000049
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 66.70000000000049
+--------------------------------------
+log_time:2025-07-29 10:08:34.728407
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 71.7000000000002
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 71.7000000000002
+--------------------------------------
+log_time:2025-07-29 10:08:35.252263
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 76.69999999999992
+LimitedSignal: 10.0
+IntegratorEnabled: True
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: True
+IntegratorFB.accumulated: 76.69999999999992
+--------------------------------------
+log_time:2025-07-29 10:08:35.774527
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 79.99999999999973
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 79.99999999999973
+--------------------------------------
+log_time:2025-07-29 10:08:36.299131
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 79.99999999999973
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 79.99999999999973
+--------------------------------------
+log_time:2025-07-29 10:08:36.823687
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: False
+AccumulatedResult: 79.99999999999973
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 0
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 79.99999999999973
+--------------------------------------
+log_time:2025-07-29 10:08:37.347080
+--------------------------------------
+AnalogRaw: 12.3
+ButtonInput: True
+AccumulatedResult: 79.99999999999973
+LimitedSignal: 10.0
+IntegratorEnabled: False
+Debounce valid_edge: False
+Debounce cycle_counter: 1
+IntegratorFB.enable: False
+IntegratorFB.accumulated: 79.99999999999973
+Program stopped by user
+Program ended
