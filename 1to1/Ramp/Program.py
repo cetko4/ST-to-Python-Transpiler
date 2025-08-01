@@ -14,16 +14,18 @@ class Program:
 
 ################# DECLARE AND DEFINE USED VARIABLES IN THIS SECTION #################
 
-	UserSetpoint = 100.0
-	SensorRaw = 99.7
-	Ramp = RampController()
-	Filter = DeadbandFilter()
+	UserSetpoint = 25.0
+	CurrentValue = 20.0
+	RampRateUp = 0.8
+	RampRateDown = 1.2
 	RampEnable = True
 	RampReset = False
-	RampRateUp = 1.0
-	RampRateDown = 2.0
-	CurrentValue = 90.0
-	Deadband = 0.5
+
+	SensorRaw = 24.0
+	Deadband = 0.3
+
+	Ramp = RampController()
+	Filter = DeadbandFilter()
 	SmoothSetpoint = None
 	SensorFiltered = None
 	AtTarget = None
@@ -37,10 +39,10 @@ class Program:
 		return
 
 	def _CYCLIC(self):
-		self.Ramp(TARGET = self.UserSetpoint, CURRENT = self.CurrentValue, RAMP_UP = self.RampRateUp, RAMP_DOWN = self.RampRateDown, ENABLE = self.RampEnable, RESET = self.RampReset)
+		self.Ramp(target = self.UserSetpoint, current = self.CurrentValue, ramp_up = self.RampRateUp, ramp_down = self.RampRateDown, enable = self.RampEnable, reset = self.RampReset)
 		self.SmoothSetpoint = self.Ramp.out
 		self.AtTarget = self.Ramp.reached
-		self.Filter(IN = self.SensorRaw, DEADBAND = self.Deadband, CENTER = self.SmoothSetpoint)
+		self.Filter(in_value = self.SensorRaw, deadband = self.Deadband, center = self.SmoothSetpoint)
 		self.SensorFiltered = self.Filter.out
 		self.SensorActive = self.Filter.is_active
 		return
@@ -57,17 +59,47 @@ class Program:
 		string += '--------------------------------------'
 		string += '\nUserSetpoint: ' + str(self.UserSetpoint)
 		string += '\nSensorRaw: ' + str(self.SensorRaw)
-		string += '\nRamp: ' + str(self.Ramp)
-		string += '\nFilter: ' + str(self.Filter)
-		string += '\nRampEnable: ' + str(self.RampEnable)
-		string += '\nRampReset: ' + str(self.RampReset)
 		string += '\nRampRateUp: ' + str(self.RampRateUp)
 		string += '\nRampRateDown: ' + str(self.RampRateDown)
 		string += '\nCurrentValue: ' + str(self.CurrentValue)
 		string += '\nDeadband: ' + str(self.Deadband)
 		string += '\nSmoothSetpoint: ' + str(self.SmoothSetpoint)
-		string += '\nSensorFiltered: ' + str(self.SensorFiltered)
 		string += '\nAtTarget: ' + str(self.AtTarget)
 		string += '\nSensorActive: ' + str(self.SensorActive)
+		string += '\nSensorFiltered: ' + str(self.SensorFiltered)
+
+		string += '\nRampOut: ' + str(self.Ramp.out)
+		string += '\nRampPrevOut: ' + str(self.Ramp.prev_out)
 		log_file.write(string)
 		print(string)
+
+if __name__ == "__main__":
+	program = Program()
+	
+	with open("program_log.txt", "w") as log_file:
+		log_file.write("Program started\n")
+		
+		try:
+			cycle_count = 0
+			
+			while True:
+				
+				program._CYCLIC()
+				
+				if cycle_count % 10 == 0:
+					program.print_variables(log_file)
+					log_file.flush()
+				
+				cycle_count += 1
+				
+				time.sleep(0.1)
+				
+		except KeyboardInterrupt:
+			print("\nProgram stopped by user (Ctrl+C)")
+			log_file.write("\nProgram stopped by user\n")
+		except Exception as e:
+			print(f"Error occurred: {e}")
+			log_file.write(f"\nError occurred: {e}\n")
+		finally:
+			log_file.write("Program ended\n")
+			print("Program ended")

@@ -101,22 +101,23 @@ class ToggleDebounce:
         self.trig = trig
         self.debounce_cycles = debounce_cycles
 
-        if self.trig and not self.prev_trig:
-            self.edge_detected = True
-            self.cycle_counter = 1
-        elif self.trig and self.prev_trig:
+        self.edge_detected = (self.trig != self.prev_trig)
+
+        if self.edge_detected:
             self.cycle_counter += 1
         else:
-            self.edge_detected = False
             self.cycle_counter = 0
 
-        if self.edge_detected and self.cycle_counter >= self.debounce_cycles:
-            self.current_state = not self.current_state
-            self.valid_edge = True
+        if self.trig == True:
+            if self.edge_detected and self.cycle_counter >= self.debounce_cycles:
+                self.valid_edge = True
         else:
-            self.valid_edge = False
+            if self.trig == False:
+                if self.edge_detected and self.cycle_counter >= self.debounce_cycles:
+                    self.valid_edge = False
 
-        self.prev_trig = self.trig
+        if self.cycle_counter == 0:
+            self.prev_trig = not self.trig
 
     @property
     def current_state(self) -> bool:

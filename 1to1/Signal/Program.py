@@ -14,11 +14,24 @@ class Program:
 
 ################# DECLARE AND DEFINE USED VARIABLES IN THIS SECTION #################
 
-	AnalogRaw = 12.3
-	ButtonInput = True
-	AccumulatedResult = None
-	LimitedSignal = None
-	IntegratorEnabled = False
+	AnalogRaw: float = 12.3
+	MinLimit: float = -10.0
+	MaxLimit: float = 10.0
+	hyster: float = 0.2
+
+	deb_cyc: int = 20
+	ButtonInput: bool = True
+	CycleCounter: int = 0
+
+	AccumulatedResult: float = None
+	LimitedSignal: float = None
+
+	IntegratorEnabled: bool = False
+	DtStep: float = 0.01
+	MaxAccum: float = 100.0
+	DeltaLimit: float = 0.5
+	ResetFlag: bool = False
+
 	LimiterFB = SignalLimiter()
 	DebounceFB = ToggleDebounce()
 	IntegratorFB = SignalIntegrator()
@@ -31,14 +44,25 @@ class Program:
 		return
 
 	def _CYCLIC(self):
-		self.LimiterFB(in_signal = self.AnalogRaw, min_limit = -10.0, max_limit = 10.0, hysteresis = 0.2)
+		self.CycleCounter += 1
+
+		if self.CycleCounter == 201:
+			self.CycleCounter = 0
+
+		if self.CycleCounter <= 100:
+			self.ButtonInput = True
+		else:
+			if self.CycleCounter >= 101:
+				self.ButtonInput = False
+		
+		self.LimiterFB(in_signal = self.AnalogRaw, min_limit = self.MinLimit, max_limit = self.MaxLimit, hysteresis = self.hyster)
 		self.LimitedSignal = self.LimiterFB.out
 		
-		self.DebounceFB(trig = self.ButtonInput, debounce_cycles = 20)
-		if self.DebounceFB.valid_edge:
-			self.IntegratorEnabled = not self.IntegratorEnabled
+		self.DebounceFB(trig = self.ButtonInput, debounce_cycles = self.deb_cyc)
+
+		self.IntegratorEnabled = self.DebounceFB.valid_edge
 		
-		self.IntegratorFB(in_signal = self.LimitedSignal, dt_step = 0.01, enable = self.IntegratorEnabled, reset = False, max_accum = 100.0, delta_limit = 0.5)
+		self.IntegratorFB(in_signal = self.LimitedSignal, dt_step = self.DtStep, enable = self.IntegratorEnabled, reset = self.ResetFlag, max_accum = self.MaxAccum, delta_limit = self.DeltaLimit)
 		self.AccumulatedResult = self.IntegratorFB.out
 		return
 
@@ -73,18 +97,12 @@ if __name__ == "__main__":
 		
 		try:
 			cycle_count = 0
-			button_toggle_interval = 200
-			button_press_duration = 50
 			
 			while True:
-				cycle_in_period = cycle_count % button_toggle_interval
-				current_button_state = cycle_in_period < button_press_duration
-				
-				program.ButtonInput = current_button_state
 				
 				program._CYCLIC()
 				
-				if cycle_count % 50 == 0:
+				if cycle_count % 1 == 0:
 					program.print_variables(log_file)
 					log_file.flush()
 				

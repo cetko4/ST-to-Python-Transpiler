@@ -1,0 +1,94 @@
+Program started
+
+--------------------------------------
+log_time:2025-07-31 10:12:28.503080
+--------------------------------------
+UserSetpoint: 25.0
+SensorRaw: 24.0
+RampRateUp: 0.8
+RampRateDown: 1.2
+CurrentValue: 20.0
+Deadband: 0.3
+SmoothSetpoint: 0.8
+AtTarget: False
+SensorActive: True
+SensorFiltered: 24.0
+RampOut: 0.8
+RampPrevOut: 0.8
+--------------------------------------
+log_time:2025-07-31 10:12:29.507823
+--------------------------------------
+UserSetpoint: 25.0
+SensorRaw: 24.0
+RampRateUp: 0.8
+RampRateDown: 1.2
+CurrentValue: 20.0
+Deadband: 0.3
+SmoothSetpoint: 8.799999999999999
+AtTarget: False
+SensorActive: True
+SensorFiltered: 24.0
+RampOut: 8.799999999999999
+RampPrevOut: 8.799999999999999
+--------------------------------------
+log_time:2025-07-31 10:12:30.513718
+--------------------------------------
+UserSetpoint: 25.0
+SensorRaw: 24.0
+RampRateUp: 0.8
+RampRateDown: 1.2
+CurrentValue: 20.0
+Deadband: 0.3
+SmoothSetpoint: 16.800000000000004
+AtTarget: False
+SensorActive: True
+SensorFiltered: 24.0
+RampOut: 16.800000000000004
+RampPrevOut: 16.800000000000004
+--------------------------------------
+log_time:2025-07-31 10:12:31.520275
+--------------------------------------
+UserSetpoint: 25.0
+SensorRaw: 24.0
+RampRateUp: 0.8
+RampRateDown: 1.2
+CurrentValue: 20.0
+Deadband: 0.3
+SmoothSetpoint: 24.80000000000001
+AtTarget: False
+SensorActive: True
+SensorFiltered: 24.0
+RampOut: 24.80000000000001
+RampPrevOut: 24.80000000000001
+--------------------------------------
+log_time:2025-07-31 10:12:32.525110
+--------------------------------------
+UserSetpoint: 25.0
+SensorRaw: 24.0
+RampRateUp: 0.8
+RampRateDown: 1.2
+CurrentValue: 20.0
+Deadband: 0.3
+SmoothSetpoint: 25.0
+AtTarget: True
+SensorActive: True
+SensorFiltered: 24.0
+RampOut: 25.0
+RampPrevOut: 25.0
+--------------------------------------
+log_time:2025-07-31 10:12:33.531372
+--------------------------------------
+UserSetpoint: 25.0
+SensorRaw: 24.0
+RampRateUp: 0.8
+RampRateDown: 1.2
+CurrentValue: 20.0
+Deadband: 0.3
+SmoothSetpoint: 25.0
+AtTarget: True
+SensorActive: True
+SensorFiltered: 24.0
+RampOut: 25.0
+RampPrevOut: 25.0
+Program stopped by user
+Program ended
