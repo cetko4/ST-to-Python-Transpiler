@@ -1,0 +1,10 @@
+# Core dependencies
+PyMuPDF>=1.23.0          # PDF processing for documentation extraction
+requests>=2.25.0          # API requests for AI-based function mapping
+
+# Development dependencies
+pytest>=7.0.0             # Testing framework
+black>=23.0.0             # Code formatting
+flake8>=6.0.0             # Linting
+mypy>=1.0.0               # Type checking
+pre-commit>=3.0.0         # Git hooks for code quality
